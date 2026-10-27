@@ -1,0 +1,16 @@
+# Ignorar carpeta oculta de configuración local de Visual Studio
+.vs/
+*.user
+
+# Ignorar carpetas de compilación
+x64/
+x86/
+Debug/
+Release/
+
+# Ignorar ejecutables y binarios de C++
+*.exe
+*.dll
+*.obj
+*.pdb
+*.ilk
