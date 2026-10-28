@@ -26,20 +26,28 @@ void reportes::revisarEspacio() {
         paginaActual = HPDF_AddPage(pdf);
         HPDF_Page_SetSize(paginaActual, HPDF_PAGE_SIZE_A4, HPDF_PAGE_PORTRAIT);
         posY = 750; // reiniciar altura del cursor a la parte de arriba, ahora en la pag nueva
-        numPagina++; // para dsps
+        numPagina++;
+        numPag();
     }
 }
+
+
 
 void reportes::generarEncabezado(string tituloReporte) {
     HPDF_Page_BeginText(paginaActual); // BeginText deja editar texto en la pag
 
     // titulo general
     HPDF_Page_SetFontAndSize(paginaActual, fuente, 22); // dice q tipo de fuente y q tmñ va a usar la pag, osea aca seria fuente helvetica y tmñ 22
-    HPDF_Page_TextOut(paginaActual, 180, 800, "Sistema de Gestion Hospitalaria"); // TextOut escribe en la pag dada, en X y X, el texto q se da en 4to parametro
+    HPDF_Page_TextOut(paginaActual, 170, 800, "Sistema de Gestion Hospitalaria"); // TextOut escribe en la pag dada, en X y X, el texto q se da en 4to parametro
 
     // titulo especifico (el q depende de opcion)
     HPDF_Page_SetFontAndSize(paginaActual, fuente, 16); // letra mas pequeñita para el titulo "secundario"
-    HPDF_Page_TextOut(paginaActual, 180, 760, tituloReporte.c_str()); //c_str da ptr a arreglo de caracteres, en este caso el arreglo seria el titulo de reporte dado
+    HPDF_Page_TextOut(paginaActual, 160, 760, tituloReporte.c_str()); //c_str da ptr a arreglo de caracteres, en este caso el arreglo seria el titulo de reporte dado
+
+    // num de hoja en la esquinita
+    HPDF_Page_SetFontAndSize(paginaActual, fuente, 10);
+    HPDF_Page_TextOut(paginaActual, 590, 840, "1"); //igual este pedazo es siempre en la primera pagina, x lo q no se ocupa actualizar ni nada, siempre es 1
+
 
     HPDF_Page_EndText(paginaActual); // EndText al reves de BeginText, cierra modo de editar de la pag
     posY = 700; // pone el cursor abajito del titulo especifico, para q las filas no lo majen
@@ -90,6 +98,14 @@ void reportes::guardarYTerminar(string nombreArchivo){
     cout << "Reporte guardado en un archivo de nombre: " << nombreArchivo << endl;
 }
 
+void reportes::numPag() {
+    HPDF_Page_BeginText(paginaActual);
+    HPDF_Page_SetFontAndSize(paginaActual, fuente, 12);
+    string Pag = "Numero de pagina: " + to_string(numPagina);
+    HPDF_Page_TextOut(paginaActual, 480, 20, Pag.c_str());
+    HPDF_Page_EndText(paginaActual);
+}
+
 void reportes::ReporteTodosPaises(ArbolPais& paises){
     reportes reportepais;
     reportepais.generarEncabezado("Listado De Todos Los Paises");
@@ -120,11 +136,19 @@ void reportes::ReporteTodasCiudadesDePais(ArbolCiudad& ciudades, ArbolPais& pais
     reporteciudad.guardarYTerminar("reporte_ciudades_de_pais.pdf");
 
 }
-/*
+
 void reportes::ReporteTodosPacientes(ArbolPacientes& pacientes) {
-
+    reportes r;
+    string titulo = "Listado De Todos Los Pacientes";
+    string archivo = "reporte_pacientes.pdf";
+    r.generarEncabezado(titulo);
+    int anchos[] = { 35, 130, 67, 75, 35, 40, 138 };
+    string textos[] = { "Id", "Nombre", "Nacimiento", "Telefono","Pais", "Ciudad","Correo"};
+    r.escribirFilaDinamica(7, textos, anchos);
+    pacientes.InordenReportesPacientes(pacientes.raiz, r, anchos);
+    r.guardarYTerminar(archivo);
 }
-
+/*
 void reportes::ReportePacientesPorPais(ArbolPacientes& pacientes, ArbolPais& paises, int codPais) {
 
 }
@@ -164,28 +188,52 @@ void reportes::ReporteTodasHospitalizaciones(ArbolHospitalizaciones& hospitaliza
     reportes r;
     string titulo = "Listado De Todas Las Hospitalizaciones";
     string archivo = "reporte_hospitalizaciones.pdf";
-    archivo = "reporte_hospitalizaciones.pdf";
     r.generarEncabezado(titulo);
-    int anchos[] = { 70, 70, 100, 120, 120, 20, 20 };
-    string textos[] = { "Id hospitalizacion", "Id paciente", "Id habitacion", "Id medico","Ingreso", "Salida", "Motivo"};
+    int anchos[] = { 50, 50, 50, 50, 80, 80, 180 };
+    string textos[] = { "Id hosp", "Id pac", "Id hab", "Id med","Ingreso", "Salida", "Motivo"};
     r.escribirFilaDinamica(7, textos, anchos);
     hospitalizaciones.InordenReportesHosp(hospitalizaciones.raiz, r, anchos);
     r.guardarYTerminar(archivo);
 }
 
-/*
-void reportes::ReporteHospitalizacionesPorMedico(ArbolHospitalizaciones& hospitalizaciones, ArbolMedicos& medicos, int idMedico) {
 
+void reportes::ReporteHospitalizacionesPorMedico(ArbolHospitalizaciones& hospitalizaciones, ArbolMedicos& medicos, int idMedico) {
+    reportes r;
+    string titulo = "Listado De Hospitalizaciones De Medico Id " + to_string(idMedico);
+    string archivo = "reporte_hospitalizaciones_de_medico.pdf";
+    r.generarEncabezado(titulo);
+    int anchos[] = { 50, 50, 50, 50, 80, 80, 180 };
+    string textos[] = { "Id med", "Id pac", "Id hab", "Id hops", "Ingreso", "Salida", "Motivo"};
+    r.escribirFilaDinamica(7, textos, anchos);
+    hospitalizaciones.InordenReportesHospDeMedico(hospitalizaciones.raiz, r, anchos, idMedico);
+    r.guardarYTerminar(archivo);
 }
 
 void reportes::ReporteTodosMedicos(ArbolMedicos& medicos) {
-
+    reportes r;
+    string titulo = "Listado De Todos Los Medicos";
+    string archivo = "reporte_medicos.pdf";
+    r.generarEncabezado(titulo);
+    int anchos[] = { 60, 140, 90, 150, 80 };
+    string textos[] = { "Id", "Nombre", "Telefono", "Correo", "Id Especialidad"};
+    r.escribirFilaDinamica(5, textos, anchos);
+    medicos.InordenReportesMedicos(medicos.raiz, r, anchos);
+    r.guardarYTerminar(archivo);
 }
+
 
 void reportes::ReporteMedicosPorEspecialidad(ArbolMedicos& medicos, ArbolEspecialidad& especialidades, int idEsp) {
-
+    reportes r;
+    string titulo = "Listado De Medicos De Especialidad Id " + to_string(idEsp);
+    string archivo = "reporte_medicos_de_especialidad.pdf";
+    r.generarEncabezado(titulo);
+    int anchos[] = { 60, 140, 90, 150, 80 };
+    string textos[] = { "Id", "Nombre", "Telefono", "Correo", "Id Especialidad"};
+    r.escribirFilaDinamica(5, textos, anchos);
+    medicos.InordenReportesMedicosPorEspecialidad(medicos.raiz, r, anchos, idEsp);
+    r.guardarYTerminar(archivo);
 }
-
+/*
 void reportes::ReporteCitasPorFecha(ArbolCitas& citas, string fecha) {
 
 }

@@ -617,7 +617,7 @@ int main() {
 					rep.ReporteTodasCiudadesDePais(arbolilloCiudades, arbolilloPaises, codpint);
 				}
 				else if (opcionReporte == 3) {
-					//rep.ReporteTodosPacientes(arbolilloPacientes);
+					rep.ReporteTodosPacientes(arbolilloPacientes);
 
 				}
 				else if (opcionReporte == 4) {
@@ -640,10 +640,10 @@ int main() {
 					cout << "Id de medico: ";
 					getline(cin, idmed);
 					int idmedint = stoi(idmed);
-					//rep.ReporteHospitalizacionesPorMedico(arbolilloHosp, arbolilloMedicos, idmedint);
+					rep.ReporteHospitalizacionesPorMedico(arbolilloHosp, arbolilloMedicos, idmedint);
 				}
 				else if (opcionReporte == 9) {
-					//rep.ReporteTodosMedicos(arbolilloMedicos);
+					rep.ReporteTodosMedicos(arbolilloMedicos);
 
 				}
 				else if (opcionReporte == 10) {
@@ -651,7 +651,7 @@ int main() {
 					cout << "Id de especialidad: ";
 					getline(cin, idesp);
 					int idespint = stoi(idesp);
-					//rep.ReporteMedicosPorEspecialidad(arbolilloMedicos, arbolilloEsp, idespint);
+					rep.ReporteMedicosPorEspecialidad(arbolilloMedicos, arbolilloEsp, idespint);
 
 				}
 				else if (opcionReporte == 11) {

@@ -8,6 +8,7 @@ using namespace std;
 #include "crud_medicos.h"
 #include "crud_especialidades.h" //validar q la especialidad existe
 
+
 //Constructor
 ArbolMedicos::ArbolMedicos()
 {
@@ -261,5 +262,34 @@ void ArbolMedicos::ModificarMedico(int idesp, int id, string telefono, string co
         nodoesta->telefono = telefono;
         nodoesta->correo = correo;
         cout << "Medico de id: " << id << " modificado correctamente" << endl;
+    }
+}
+
+void ArbolMedicos::InordenReportesMedicos(pPagMed r, reportes& rep, int anchos[]) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesMedicos(r->ramas[0], rep, anchos); // no se podia hacer r->Hizq/Hder x ser diferente
+    for (int i = 1; i <= r->cuenta;i++) { // < solo se jodia
+        //string textos[] = { to_string(r->idMedico), r->nombre, r->telefono, r->correo, to_string(r->idEspecialidad) };
+        string textos[] = { to_string(r->claves[i].idMedico), r->claves[i].nombre, r->claves[i].telefono, r->claves[i].correo,to_string(r->claves[i].idEspecialidad) };
+        rep.escribirFilaDinamica(5, textos, anchos);
+        InordenReportesMedicos(r->ramas[i], rep, anchos); // estas dos ultimas lineas si van dentro del for, sino no se actualiza el [i]
+    }
+
+}
+
+void ArbolMedicos::InordenReportesMedicosPorEspecialidad(pPagMed r, reportes& rep, int anchos[], int IdEspFiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesMedicosPorEspecialidad(r->ramas[0], rep, anchos, IdEspFiltro); // no se podia hacer r->Hizq/Hder x ser diferente
+    for (int i = 1; i <= r->cuenta;i++) { // < solo se jodia
+        if (r->claves[i].idEspecialidad == IdEspFiltro) {
+            //string textos[] = { to_string(r->idMedico), r->nombre, r->telefono, r->correo, to_string(r->idEspecialidad) };
+            string textos[] = { to_string(r->claves[i].idMedico), r->claves[i].nombre, r->claves[i].telefono, r->claves[i].correo,to_string(r->claves[i].idEspecialidad)};
+            rep.escribirFilaDinamica(5, textos, anchos);
+        }
+        InordenReportesMedicosPorEspecialidad(r->ramas[i], rep, anchos, IdEspFiltro); // estas dos ultimas lineas si van dentro del for, sino no se actualiza el [i]
     }
 }

@@ -283,3 +283,16 @@ void ArbolHospitalizaciones::InordenReportesHosp(pHosp r, reportes& rep, int anc
 
 }
 
+void ArbolHospitalizaciones::InordenReportesHospDeMedico(pHosp r, reportes& rep, int anchos[], int MedicoFiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesHospDeMedico(r->Hizq, rep, anchos, MedicoFiltro);
+    if (r->idMedico == MedicoFiltro) {
+        string textos[] = { to_string(r->idMedico), to_string(r->idPaciente), to_string(r->idHabitacion), to_string(r->idHospitalizacion), r->fechaIngreso, r->fechaSalida, r->motivo };
+        rep.escribirFilaDinamica(7, textos, anchos);
+    }
+    InordenReportesHospDeMedico(r->Hder, rep, anchos, MedicoFiltro);
+
+}
+

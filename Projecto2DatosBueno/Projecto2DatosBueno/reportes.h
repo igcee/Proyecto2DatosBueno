@@ -28,8 +28,6 @@ private:
     int inicioX; // margen izquierdo 
     int altoFila; // altura de cada celda
 
-    void revisarEspacio();
-
 public:
     reportes() {
         pdf = HPDF_New(NULL, NULL); //crear el obj de documento
@@ -44,20 +42,25 @@ public:
         numPagina = 1;
         inicioX = 40;
         altoFila = 25;
+
+        numPag();
+
     }
     void generarEncabezado(string tituloReporte);
     void escribirFilaDinamica(int cantColumnas, string textos[], int anchos[]);
     void guardarYTerminar(string nombreArchivo);
+    void revisarEspacio();
+    void numPag();
 
     void ReporteTodosPaises(ArbolPais& paises);
     void ReporteTodasCiudadesDePais(ArbolCiudad& ciudades, ArbolPais& paises, int codPaisFiltro);
-    //void ReporteTodosPacientes(ArbolPacientes& pacientes);
+    void ReporteTodosPacientes(ArbolPacientes& pacientes);
     void ReporteTodasEspecialidades(ArbolEspecialidad& especialidad);
     void ReporteHabitaciones(ArbolHabitaciones& habitaciones, int estado);
     void ReporteTodasHospitalizaciones(ArbolHospitalizaciones& hospitalizaciones);
-    //void ReporteHospitalizacionesPorMedico(ArbolHospitalizaciones& hospitalizaciones, ArbolMedicos& medicos);
-    //void ReporteTodosMedicos(ArbolMedicos& medicos);
-    //void ReporteMedicosPorEspecialidad(ArbolMedicos& medicos);
+    void ReporteHospitalizacionesPorMedico(ArbolHospitalizaciones& hospitalizaciones, ArbolMedicos& medicos, int IdMedico);
+    void ReporteTodosMedicos(ArbolMedicos& medicos);
+    void ReporteMedicosPorEspecialidad(ArbolMedicos& medicos, ArbolEspecialidad& especialidad, int IdEspFiltro);
     //void ReporteCitasPorFecha(ArbolCitas& citas);
     //void ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad& especialidad);
     //void ReporteCitasPorMedico(ArbolCitas& citas, ArbolMedicos& medicos);

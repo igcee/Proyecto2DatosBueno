@@ -1,0 +1,111 @@
+%PDF-1.3
+%·¾­ª
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [ 4 0 R ]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Producer (Haru Free PDF Library 2.4.6)
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/MediaBox [ 0 0 595.276 841.89001 ]
+/Contents 5 0 R
+/Resources <<
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+/Font <<
+/F1 7 0 R
+>>
+>>
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 6 0 R
+>>
+stream
+BT
+/F1 22 Tf
+170 800 Td
+(Sistema de Gestion Hospitalaria) Tj
+/F1 16 Tf
+-10 -40 Td
+(Listado De Hospitalizaciones De Medico Id 991) Tj
+ET
+BT
+/F1 10 Tf
+45 700 Td
+(Id med) Tj
+50 0 Td
+(Id pac) Tj
+50 0 Td
+(Id hab) Tj
+50 0 Td
+(Id hops) Tj
+50 0 Td
+(Ingreso) Tj
+80 0 Td
+(Salida) Tj
+80 0 Td
+(Motivo) Tj
+ET
+40 695 520 25 re
+90 695 m
+90 720 l
+140 695 m
+140 720 l
+190 695 m
+190 720 l
+240 695 m
+240 720 l
+320 695 m
+320 720 l
+400 695 m
+400 720 l
+S
+
+endstream
+endobj
+6 0 obj
+433
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /StandardEncoding
+>>
+endobj
+xref
+0 8
+0000000000 65535 f
+0000000015 00000 n
+0000000064 00000 n
+0000000123 00000 n
+0000000184 00000 n
+0000000370 00000 n
+0000000857 00000 n
+0000000876 00000 n
+trailer
+<<
+/Root 1 0 R
+/Info 3 0 R
+/Size 8
+>>
+startxref
+974
+%%EOF

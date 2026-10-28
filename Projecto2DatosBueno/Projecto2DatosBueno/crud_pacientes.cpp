@@ -8,6 +8,7 @@
 using namespace std;
 #include "crud_pacientes.h"
 #include "crud_ciudades.h" //validar q la ciudad existe
+#include "reportes.h"
 
 //Constructor
 ArbolPacientes::ArbolPacientes()
@@ -268,5 +269,17 @@ void ArbolPacientes::ModificarPaciente(int codpais, int codciudad, int id, strin
         nodoesta->telefono = telefono;
         nodoesta->correo = correo;
         cout << "Paciente de id: " << id << " modificado correctamente" << endl;
+    }
+}
+
+void ArbolPacientes::InordenReportesPacientes(pPagPac r, reportes& rep, int anchos[]) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesPacientes(r->ramas[0], rep, anchos);
+    for (int i = 1; i <= r->cuenta;i++) {
+        string textos[] = { to_string(r->claves[i].idPaciente), r->claves[i].nombre, r->claves[i].fechaNacimiento,  r->claves[i].telefono, to_string(r->claves[i].codPais), to_string(r->claves[i].codCiudad),r->claves[i].correo};
+        rep.escribirFilaDinamica(7, textos, anchos);
+        InordenReportesPacientes(r->ramas[i], rep, anchos);
     }
 }

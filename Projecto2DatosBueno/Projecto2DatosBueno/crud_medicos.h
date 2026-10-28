@@ -6,7 +6,7 @@
 #include <string>
 using namespace std;
 #include "crud_especialidades.h" //para validar q la especialidad exista
-
+#include "reportes.h"
 // Arbol B
 
 const int MAXMED = 4;
@@ -32,6 +32,7 @@ public:
         idEspecialidad = idesp;
     }
     friend class ArbolMedicos;
+    friend class reportes;
 };
 typedef NodoMedico* pMedico;
 
@@ -48,6 +49,7 @@ public:
         }
     }
     friend class ArbolMedicos;
+    friend class reportes;
 };
 typedef PaginaMedico* pPagMed;
 
@@ -76,5 +78,7 @@ public:
     void BuscarMostrar(int idesp, int id, ArbolEspecialidad& esp);
     void ModificarMedico(int idesp, int id, string telefono, string correo, ArbolEspecialidad& esp);
     //Medicos necesita validar q la especialidad exista, se pasa como parametro x referencia
+    void InordenReportesMedicos(pPagMed r, reportes& rep, int anchos[]);
+    void InordenReportesMedicosPorEspecialidad(pPagMed r, reportes& rep, int anchos[], int idespfiltro);
 };
 #endif

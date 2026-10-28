@@ -6,6 +6,7 @@
 #include <string>
 using namespace std;
 #include "crud_ciudades.h" //para validar q la ciudad exista
+#include "reportes.h"
 //Arbol B
 
 const int MAXPAC = 4;
@@ -80,5 +81,6 @@ public:
     void BuscarMostrar(int codpais, int codciudad, int id, ArbolCiudad& ciudades);
     void ModificarPaciente(int codpais, int codciudad, int id, string telefono, string correo, ArbolCiudad& ciudades);
     //Pacientes necesita validar q la ciudad exista, se pasa como parametro x referencia
+    void InordenReportesPacientes(pPagPac r, reportes& rep, int anchos[]);
 };
 #endif

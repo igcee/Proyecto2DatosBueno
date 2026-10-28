@@ -39,11 +39,13 @@ public:
         Hder = nullptr;
     }
     friend class ArbolHospitalizaciones;
+    //friend class ArbolMedicos
 };
 typedef NodoHosp* pHosp;
 
 class ArbolHospitalizaciones {
     friend class reportes;
+    //friend class ArbolMedico
 private:
     pHosp raiz;
 
@@ -66,6 +68,7 @@ public:
     void BuscarMostrar(int idPac, int idHab, int idHosp, ArbolPacientes& pacientes, ArbolHabitaciones& habitaciones);
     void ModificarHosp(int idPac, int idHab, int idHosp, string nuevoMotivo, ArbolPacientes& pacientes, ArbolHabitaciones& habitaciones);
     void InordenReportesHosp(pHosp r, reportes& rep, int anchos[]);
+    void InordenReportesHospDeMedico(pHosp r, reportes& rep, int anchos[], int IdMedico);
 };
 
 #endif
