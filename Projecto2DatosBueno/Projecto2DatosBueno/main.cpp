@@ -681,7 +681,7 @@ int main() {
 					cout << "Codigo de pais: ";
 					getline(cin, codpais);
 					int codpaisint = stoi(codpais);
-					//rep.ReportePacientesPorPais(arbolilloPacientes, arbolilloPaises, codpaisint);
+					rep.ReportePacientesPorPais(arbolilloPacientes, arbolilloPaises, codpaisint);
 				}
 				else if (opcionReporte == 15) {
 					string codpais, codciudad;

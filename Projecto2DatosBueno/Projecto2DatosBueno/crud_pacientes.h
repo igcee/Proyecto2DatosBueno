@@ -7,6 +7,7 @@
 using namespace std;
 #include "crud_ciudades.h" //para validar q la ciudad exista
 #include "reportes.h"
+#include "crud_paises.h"
 //Arbol B
 
 const int MAXPAC = 4;
@@ -82,5 +83,7 @@ public:
     void ModificarPaciente(int codpais, int codciudad, int id, string telefono, string correo, ArbolCiudad& ciudades);
     //Pacientes necesita validar q la ciudad exista, se pasa como parametro x referencia
     void InordenReportesPacientes(pPagPac r, reportes& rep, int anchos[]);
+    void InordenReportesPacientesPorPais(pPagPac r, reportes& rep, int anchos[], int codPais);
+
 };
 #endif

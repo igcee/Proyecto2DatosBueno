@@ -64,7 +64,7 @@ public:
     //void ReporteCitasPorFecha(ArbolCitas& citas);
     //void ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad& especialidad);
     //void ReporteCitasPorMedico(ArbolCitas& citas, ArbolMedicos& medicos);
-    //void ReportePacientesPorPais(ArbolPacientes& paciente, ArbolPais& pais);
+    void ReportePacientesPorPais(ArbolPacientes& paciente, ArbolPais& pais, int codPaisFiltro);
     //void ReportePacientesPorCiudad(ArbolPacientes& paciente, ArbolCiudad& ciudad, ArbolPais& pais);
     //void ReporteCitasPorPaciente(ArbolCitas& citas, ArbolPacientes& paciente);
     void ReporteTodosDiagnosticos(ArbolDiagnostico& diag);

@@ -148,11 +148,19 @@ void reportes::ReporteTodosPacientes(ArbolPacientes& pacientes) {
     pacientes.InordenReportesPacientes(pacientes.raiz, r, anchos);
     r.guardarYTerminar(archivo);
 }
-/*
+
 void reportes::ReportePacientesPorPais(ArbolPacientes& pacientes, ArbolPais& paises, int codPais) {
-
+    reportes r;
+    string titulo = "Listado De Pacientes De Pais Id " + to_string(codPais);
+    string archivo = "reporte_pacientes_de_pais.pdf";
+    r.generarEncabezado(titulo);
+    int anchos[] = { 35, 130, 67, 75, 35, 40, 138 };
+    string textos[] = { "Id", "Nombre", "Nacimiento", "Telefono","Pais", "Ciudad","Correo" };
+    r.escribirFilaDinamica(7, textos, anchos);
+    pacientes.InordenReportesPacientesPorPais(pacientes.raiz, r, anchos, codPais);
+    r.guardarYTerminar(archivo);
 }
-
+/*
 void reportes::ReportePacientesPorCiudad(ArbolPacientes& pacientes, ArbolCiudad& ciudades, ArbolPais& paises, int codPais, int codCiudad) {
 
 }
