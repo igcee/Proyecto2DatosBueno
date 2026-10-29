@@ -1,3 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
+// ^ este chunche es para q deje usar ctime, sin este el codigo manda:
+// "This function or variable may be unsafe. Consider using ctime_s instead. To disable dprecation, use _CRT_SECURE_NO_WARNINGS"
+// y me daba paja ponerme a buscar como haberlo "bien", pq ctime_s pedia parametros de buffer parayoquese
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,6 +19,7 @@ using namespace std;
 #include "crud_citas.h"
 #include "crud_hospitalizaciones.h"
 #include "crud_pacientes.h"
+#include <ctime>
 
 
 
@@ -34,23 +40,59 @@ void reportes::revisarEspacio() {
 
 
 void reportes::generarEncabezado(string tituloReporte) {
+
     HPDF_Page_BeginText(paginaActual); // BeginText deja editar texto en la pag
 
     // titulo general
-    HPDF_Page_SetFontAndSize(paginaActual, fuente, 22); // dice q tipo de fuente y q tmñ va a usar la pag, osea aca seria fuente helvetica y tmñ 22
-    HPDF_Page_TextOut(paginaActual, 170, 800, "Sistema de Gestion Hospitalaria"); // TextOut escribe en la pag dada, en X y X, el texto q se da en 4to parametro
+    HPDF_Page_SetFontAndSize(paginaActual, fuenteNegrita, 22); // dice q tipo de fuente y q tmñ va a usar la pag, osea aca seria fuente helvetica y tmñ 22
+    HPDF_Page_TextOut(paginaActual, 137, 810, "Sistema de Gestion Hospitalaria"); // TextOut escribe en la pag dada, en X y X, el texto q se da en 4to parametro
 
     // titulo especifico (el q depende de opcion)
-    HPDF_Page_SetFontAndSize(paginaActual, fuente, 16); // letra mas pequeñita para el titulo "secundario"
-    HPDF_Page_TextOut(paginaActual, 160, 760, tituloReporte.c_str()); //c_str da ptr a arreglo de caracteres, en este caso el arreglo seria el titulo de reporte dado
+    HPDF_Page_SetFontAndSize(paginaActual, fuenteNegrita, 16); // letra mas pequeñita para el titulo "secundario"
+    HPDF_Page_TextOut(paginaActual, 47, 781, tituloReporte.c_str()); //c_str da ptr a arreglo de caracteres, en este caso el arreglo seria el titulo de reporte dado
 
-    // num de hoja en la esquinita
+    // fecha
+    time_t ahorita = time(0); // time consulta relog de compu
+    string fechahora = ctime(&ahorita); //ctime agarra ptr a variable time_t (variable "ahorita") y lo pasa a cadena txt
+    string txtfecha = "Fecha de emision del reporte: " + fechahora;
     HPDF_Page_SetFontAndSize(paginaActual, fuente, 10);
-    HPDF_Page_TextOut(paginaActual, 590, 840, "1"); //igual este pedazo es siempre en la primera pagina, x lo q no se ocupa actualizar ni nada, siempre es 1
+    HPDF_Page_TextOut(paginaActual, 47, 758, txtfecha.c_str());
+
+    //nombres
+    HPDF_Page_TextOut(paginaActual, 337, 761, "Empleados del mes:");
+    HPDF_Page_TextOut(paginaActual, 337, 747, "Ian Gabriel Castro Esquivel");
+    HPDF_Page_TextOut(paginaActual, 337, 733, "Maria Paula Monge Naranjo");
+    //nombres v2
+    HPDF_Page_TextOut(paginaActual, 47, 710, "Jefe del hospital: Ivannia Cerdas Quesada");
+    HPDF_Page_TextOut(paginaActual, 47, 696, "Jefe asistente: Isaac Van der Bom");
+
+    //recordatorio de q los totales se escriben al puro final, al puro principio de guardarYTerminar()
 
 
     HPDF_Page_EndText(paginaActual); // EndText al reves de BeginText, cierra modo de editar de la pag
-    posY = 700; // pone el cursor abajito del titulo especifico, para q las filas no lo majen
+
+
+
+    // linea caja
+    HPDF_Page_Rectangle(paginaActual, 40, 685, 520, 150); // rectangulo exterior q tiene titulos, fecha, totales y nombres dentro
+    // linea debajo de titulo principal
+    HPDF_Page_MoveTo(paginaActual, 40, 800);  
+    HPDF_Page_LineTo(paginaActual, 560, 800);
+    // linea debajo de titulo especifico
+    HPDF_Page_MoveTo(paginaActual, 40, 775);  
+    HPDF_Page_LineTo(paginaActual, 560, 775);
+    // entre fecha y totales (solo lado izq, la linea para masomenos por la mitad, cuando choca con la parte de nombres)
+    HPDF_Page_MoveTo(paginaActual, 40, 750);  
+    HPDF_Page_LineTo(paginaActual, 330, 750);
+    // vertical que separa fecha/totales de nombres
+    HPDF_Page_MoveTo(paginaActual, 330, 725); 
+    HPDF_Page_LineTo(paginaActual, 330, 775);
+    //fila nombres v2
+    HPDF_Page_MoveTo(paginaActual, 40, 725);
+    HPDF_Page_LineTo(paginaActual, 560, 725);
+    HPDF_Page_Stroke(paginaActual);
+
+    posY = 650; // pone el cursor abajito del las varas de titulo y eso, para q las filas no lo majen
 }
 
 void reportes::escribirFilaDinamica(int cantColumnas, string textos[], int anchos[]) {
@@ -58,6 +100,7 @@ void reportes::escribirFilaDinamica(int cantColumnas, string textos[], int ancho
     // la cantidad de elementos en los 2 arreglos tiene que ser igual al valor de columnas para que quede todo bien
     // el valor de la SUMA en el arreglo de ancho TIENE QUE ser 520, para evitar que aveces quede chueco
     revisarEspacio();
+    contador++; // cantidad de filas totales del reporte, se inc cuando ya se va a escribir. No hay problema con q la de encabezados cuente entre los totales, pq antes de llamar se hace contador-1
 
     int anchoTotal = 520;
     
@@ -93,6 +136,7 @@ void reportes::escribirFilaDinamica(int cantColumnas, string textos[], int ancho
 }
 
 void reportes::guardarYTerminar(string nombreArchivo){
+    escribirTotal(); // no tiene sentido hacer lo de totales en otro momento, se ocupa despues de saber cuantas filas con datos tuve el reporte al final, por eso se llama aca
     HPDF_SaveToFile(pdf, nombreArchivo.c_str()); //guarda el doc
     HPDF_Free(pdf); // chunche para liberar mem del doc
     cout << "Reporte guardado en un archivo de nombre: " << nombreArchivo << endl;
@@ -105,6 +149,24 @@ void reportes::numPag() {
     HPDF_Page_TextOut(paginaActual, 480, 20, Pag.c_str());
     HPDF_Page_EndText(paginaActual);
 }
+
+void reportes::escribirTotal() {
+    //revisarEspacio();
+    HPDF_Page_BeginText(primeraPag);
+    HPDF_Page_SetFontAndSize(primeraPag, fuente, 10);
+    string txttotales = "Total de registros: " + to_string(contador - 1); // -1 para no contar el del encabezado
+    HPDF_Page_TextOut(primeraPag, 47, 733, txttotales.c_str());
+    HPDF_Page_EndText(primeraPag);
+}
+
+
+
+
+
+
+
+//------ los reportes ------------------------------------------------------------------
+
 
 void reportes::ReporteTodosPaises(ArbolPais& paises){
     reportes reportepais;
@@ -149,22 +211,42 @@ void reportes::ReporteTodosPacientes(ArbolPacientes& pacientes) {
     r.guardarYTerminar(archivo);
 }
 
-void reportes::ReportePacientesPorPais(ArbolPacientes& pacientes, ArbolPais& paises, int codPais) {
+void reportes::ReportePacientesPorPais(ArbolPacientes& pacientes, ArbolPais& paises, int codPaisFiltro) {
+    if (paises.Buscarvalor(codPaisFiltro) == nullptr) {
+        cout << "ERROR: no existe un pais de codigo: " << codPaisFiltro << endl;
+        return;
+    }
     reportes r;
-    string titulo = "Listado De Pacientes De Pais Id " + to_string(codPais);
+    string titulo = "Listado De Pacientes De Pais Id " + to_string(codPaisFiltro);
     string archivo = "reporte_pacientes_de_pais.pdf";
     r.generarEncabezado(titulo);
     int anchos[] = { 35, 130, 67, 75, 35, 40, 138 };
     string textos[] = { "Id", "Nombre", "Nacimiento", "Telefono","Pais", "Ciudad","Correo" };
     r.escribirFilaDinamica(7, textos, anchos);
-    pacientes.InordenReportesPacientesPorPais(pacientes.raiz, r, anchos, codPais);
+    pacientes.InordenReportesPacientesPorPais(pacientes.raiz, r, anchos, codPaisFiltro);
     r.guardarYTerminar(archivo);
 }
-/*
-void reportes::ReportePacientesPorCiudad(ArbolPacientes& pacientes, ArbolCiudad& ciudades, ArbolPais& paises, int codPais, int codCiudad) {
 
+void reportes::ReportePacientesPorCiudad(ArbolPacientes& pacientes, ArbolCiudad& ciudades, ArbolPais& paises,  int codPais,int codCiudad) {
+    if (paises.Buscarvalor(codPais) == nullptr) {
+        cout << "ERROR: no existe un pais de codigo: " << codPais << endl;
+        return;
+    }
+    if (ciudades.Buscarvalor(codPais, codCiudad) == nullptr) {
+        cout << "ERROR: no existe una ciudad de codigo: " << codCiudad << endl << " en el pais de codigo " << codPais << endl;
+        return;
+    }
+    reportes r;
+    string titulo = "Listado De Pacientes De Ciudad Id " + to_string(codCiudad) + " Y Pais De Id "+ to_string(codPais);
+    string archivo = "reporte_pacientes_de_ciudad_de_pais.pdf";
+    r.generarEncabezado(titulo);
+    int anchos[] = { 35, 130, 67, 75, 35, 40, 138 };
+    string textos[] = { "Id", "Nombre", "Nacimiento", "Telefono","Pais", "Ciudad","Correo" };
+    r.escribirFilaDinamica(7, textos, anchos);
+    pacientes.InordenReportesPacientesPorCiudad(pacientes.raiz, r, anchos, codPais, codCiudad);
+    r.guardarYTerminar(archivo);
 }
-*/
+
 void reportes::ReporteTodasEspecialidades(ArbolEspecialidad& especialidades) {
     reportes r;
     r.generarEncabezado("Listado De Todas Las Especialidades");
@@ -253,11 +335,22 @@ void reportes::ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad&
 void reportes::ReporteCitasPorMedico(ArbolCitas& citas, ArbolMedicos& medicos, int idMedico) {
 
 }
-
-void reportes::ReporteCitasPorPaciente(ArbolCitas& citas, ArbolPacientes& pacientes, int idPaciente) {
-
-}
 */
+void reportes::ReporteCitasPorPaciente(ArbolCitas& citas, ArbolPacientes& pacientes, int idPacienteFiltro) {
+    if (pacientes.Buscarvalor(idPacienteFiltro) == nullptr) {
+        cout << "ERROR: no existe un paciente de codigo: " << idPacienteFiltro << endl;
+        return;
+    }
+    reportes r;
+    string titulo = "Listado De Citas De Paciente Id " + to_string(idPacienteFiltro);
+    r.generarEncabezado(titulo);
+    int anchos[] = { 30,55,55,55,80,70,115,60 };
+    string textos[] = { "Id", "IdPaciente","IdMedico","IdEspec","Fecha","Hora","Motivo","Estado" };
+    r.escribirFilaDinamica(8, textos, anchos);
+    citas.InordenReportesCitasPorPaciente(citas.raiz, r,  anchos, idPacienteFiltro);
+    r.guardarYTerminar("reporte_citas_de_paciente.pdf");
+}
+
 void reportes::ReporteTodosDiagnosticos(ArbolDiagnostico& diag) {
     reportes r;
     r.generarEncabezado("Listado De Todos Los Diagnosticos");

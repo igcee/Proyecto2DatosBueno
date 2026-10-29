@@ -7,6 +7,7 @@
 using namespace std;
 #include "crud_medicos.h"
 #include "crud_pacientes.h"
+#include "reportes.h"
 
 
 class NodoCita {
@@ -37,11 +38,13 @@ public:
         Hder = nullptr;
     }
     friend class ArbolCitas;
+    friend class reportes;
 };
 
 typedef NodoCita* pCita;
 
 class ArbolCitas {
+    friend class reportes;
 private:
     pCita raiz;
 
@@ -66,7 +69,7 @@ public:
     void leerArchivo(const char* nombreArchivo, ArbolPacientes& pacientes, ArbolMedicos& medicos);
     void BuscarMostrar(int idp, int idm, int id, ArbolPacientes& pacientes, ArbolMedicos& medicos);
     void ModificarCita(int idp, int idm, int idc, string motivo, int estado, ArbolPacientes& pacientes, ArbolMedicos& medicos);
-
+    void InordenReportesCitasPorPaciente(pCita r, reportes& rep, int anchos[], int IdPacFiltro);
 
 };
 

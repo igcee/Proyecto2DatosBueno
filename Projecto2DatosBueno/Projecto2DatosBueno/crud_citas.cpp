@@ -334,8 +334,18 @@ void ArbolCitas::ModificarCita(int idp, int idm, int idc, string motivo, int est
 
 
     }
-    
+
+}
 
 
-
+void ArbolCitas::InordenReportesCitasPorPaciente(pCita r, reportes& rep, int anchos[], int IdPacFiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesCitasPorPaciente(r->Hizq,rep,anchos,IdPacFiltro);
+    if (r->idPaciente == IdPacFiltro) {
+        string textos[] = { to_string(r->idCita), to_string(r->idPaciente), to_string(r->idMedico),to_string(r->idEspecialidad), r->fecha,r->hora,r->motivo,to_string(r->estado)};
+        rep.escribirFilaDinamica(8, textos, anchos);
+    }
+    InordenReportesCitasPorPaciente(r->Hder, rep, anchos, IdPacFiltro);
 }

@@ -297,3 +297,17 @@ void ArbolPacientes::InordenReportesPacientesPorPais(pPagPac r, reportes& rep, i
         InordenReportesPacientesPorPais(r->ramas[i], rep, anchos, codPaisFiltro);
     }
 }
+
+void ArbolPacientes::InordenReportesPacientesPorCiudad(pPagPac r, reportes& rep, int anchos[], int codPaisFiltro,int codCiudadFiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesPacientesPorCiudad(r->ramas[0], rep, anchos, codPaisFiltro,codCiudadFiltro);
+    for (int i = 1; i <= r->cuenta;i++) {
+        if (r->claves[i].codCiudad == codCiudadFiltro and r->claves[i].codPais == codPaisFiltro) {
+            string textos[] = { to_string(r->claves[i].idPaciente), r->claves[i].nombre, r->claves[i].fechaNacimiento,  r->claves[i].telefono, to_string(r->claves[i].codPais), to_string(r->claves[i].codCiudad),r->claves[i].correo };
+            rep.escribirFilaDinamica(7, textos, anchos);
+        }
+        InordenReportesPacientesPorCiudad(r->ramas[i], rep, anchos, codPaisFiltro,codCiudadFiltro);
+    }
+}

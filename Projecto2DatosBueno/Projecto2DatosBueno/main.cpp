@@ -675,7 +675,7 @@ int main() {
 					cout << "Id de medico: ";
 					getline(cin, idmed);
 					int idmedint = stoi(idmed);
-					//rep.ReporteCitasPorMedico(arbolilloCitas, arbolilloMedicos, idmedint|);
+					//rep.ReporteCitasPorMedico(arbolilloCitas, arbolilloMedicos, idmedint);
 
 				}
 				else if (opcionReporte == 14) {
@@ -693,14 +693,14 @@ int main() {
 					getline(cin, codciudad);
 					int codpaisint = stoi(codpais);
 					int codciudadint = stoi(codciudad);
-					//rep.ReportePacientesPorCiudad(arbolilloPacientes, arbolilloCiudades, arbolilloPaises, codpaisint, codciudadint);
+					rep.ReportePacientesPorCiudad(arbolilloPacientes, arbolilloCiudades, arbolilloPaises, codpaisint, codciudadint);
 				}
 				else if (opcionReporte == 16) {
 					string idpac;
 					cout << "Id de paciente: ";
 					getline(cin, idpac);
 					int idpacint = stoi(idpac);
-					//rep.ReporteCitasPorPaciente(arbolilloCitas, arbolilloPacientes, idpacint);
+					rep.ReporteCitasPorPaciente(arbolilloCitas, arbolilloPacientes, idpacint);
 				}
 				else if (opcionReporte == 17) {
 					rep.ReporteTodosDiagnosticos(arbolilloDiag);

@@ -84,6 +84,7 @@ public:
     //Pacientes necesita validar q la ciudad exista, se pasa como parametro x referencia
     void InordenReportesPacientes(pPagPac r, reportes& rep, int anchos[]);
     void InordenReportesPacientesPorPais(pPagPac r, reportes& rep, int anchos[], int codPais);
+    void InordenReportesPacientesPorCiudad(pPagPac r, reportes& rep, int anchos[], int codPaisFiltro,int codCiudadFiltro);
 
 };
 #endif
