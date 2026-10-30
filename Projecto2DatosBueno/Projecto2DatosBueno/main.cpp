@@ -675,7 +675,7 @@ int main() {
 					cout << "Id de medico: ";
 					getline(cin, idmed);
 					int idmedint = stoi(idmed);
-					//rep.ReporteCitasPorMedico(arbolilloCitas, arbolilloMedicos, idmedint);
+					rep.ReporteCitasPorMedico(arbolilloCitas, arbolilloMedicos, idmedint);
 
 				}
 				else if (opcionReporte == 14) {

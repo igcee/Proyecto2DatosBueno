@@ -70,6 +70,7 @@ public:
     void BuscarMostrar(int idp, int idm, int id, ArbolPacientes& pacientes, ArbolMedicos& medicos);
     void ModificarCita(int idp, int idm, int idc, string motivo, int estado, ArbolPacientes& pacientes, ArbolMedicos& medicos);
     void InordenReportesCitasPorPaciente(pCita r, reportes& rep, int anchos[], int IdPacFiltro);
+    void InordenReportesCitasPorMedico(pCita r, reportes& rep, int anchos[], int idMedFiltro);
 
 };
 

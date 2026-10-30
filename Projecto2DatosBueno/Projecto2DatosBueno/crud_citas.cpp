@@ -349,3 +349,15 @@ void ArbolCitas::InordenReportesCitasPorPaciente(pCita r, reportes& rep, int anc
     }
     InordenReportesCitasPorPaciente(r->Hder, rep, anchos, IdPacFiltro);
 }
+
+void ArbolCitas::InordenReportesCitasPorMedico(pCita r, reportes& rep, int anchos[], int IdMedFiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesCitasPorMedico(r->Hizq, rep, anchos, IdMedFiltro);
+    if (r->idMedico == IdMedFiltro) {
+        string textos[] = { to_string(r->idCita), to_string(r->idPaciente), to_string(r->idMedico),to_string(r->idEspecialidad), r->fecha,r->hora,r->motivo,to_string(r->estado) };
+        rep.escribirFilaDinamica(8, textos, anchos);
+    }
+    InordenReportesCitasPorMedico(r->Hder, rep, anchos, IdMedFiltro);
+}
