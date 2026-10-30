@@ -361,3 +361,27 @@ void ArbolCitas::InordenReportesCitasPorMedico(pCita r, reportes& rep, int ancho
     }
     InordenReportesCitasPorMedico(r->Hder, rep, anchos, IdMedFiltro);
 }
+
+void ArbolCitas::InordenReportesCitasPorEspecialidad(pCita r, reportes& rep, int anchos[], int idEspFiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesCitasPorEspecialidad(r->Hizq, rep, anchos, idEspFiltro);
+    if (r->idEspecialidad == idEspFiltro) {
+        string textos[] = { to_string(r->idCita), to_string(r->idPaciente), to_string(r->idMedico),to_string(r->idEspecialidad), r->fecha,r->hora,r->motivo,to_string(r->estado) };
+        rep.escribirFilaDinamica(8, textos, anchos);
+    }
+    InordenReportesCitasPorEspecialidad(r->Hder, rep, anchos, idEspFiltro);
+}
+
+void ArbolCitas::InordenReportesCitasPorFecha(pCita r, reportes& rep, int anchos[], string fechafiltro) {
+    if (r == nullptr) {
+        return;
+    }
+    InordenReportesCitasPorFecha(r->Hizq, rep, anchos, fechafiltro);
+    if (r->fecha == fechafiltro) {
+        string textos[] = { to_string(r->idCita), to_string(r->idPaciente), to_string(r->idMedico),to_string(r->idEspecialidad), r->fecha,r->hora,r->motivo,to_string(r->estado) };
+        rep.escribirFilaDinamica(8, textos, anchos);
+    }
+    InordenReportesCitasPorFecha(r->Hder, rep, anchos, fechafiltro);
+}

@@ -72,8 +72,8 @@ public:
     void ReporteHospitalizacionesPorMedico(ArbolHospitalizaciones& hospitalizaciones, ArbolMedicos& medicos, int IdMedico);
     void ReporteTodosMedicos(ArbolMedicos& medicos);
     void ReporteMedicosPorEspecialidad(ArbolMedicos& medicos, ArbolEspecialidad& especialidad, int IdEspFiltro);
-    //void ReporteCitasPorFecha(ArbolCitas& citas, string FechaFiltro);
-    //void ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad& especialidad, int idEspFiltro);
+    void ReporteCitasPorFecha(ArbolCitas& citas, string FechaFiltro);
+    void ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad& especialidad, int idEspFiltro);
     void ReporteCitasPorMedico(ArbolCitas& citas, ArbolMedicos& medicos, int idMedFiltro);
     void ReportePacientesPorPais(ArbolPacientes& paciente, ArbolPais& pais, int codPaisFiltro);
     void ReportePacientesPorCiudad(ArbolPacientes& paciente, ArbolCiudad& ciudad, ArbolPais& pais, int codPaisFiltro, int codCiudadFiltro);

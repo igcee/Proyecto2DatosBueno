@@ -660,14 +660,14 @@ int main() {
 					string fecha;
 					cout << "Fecha (dd/mm/aaaa): ";
 					getline(cin, fecha);
-					//rep.ReporteCitasPorFecha(arbolilloCitas, fecha);
+					rep.ReporteCitasPorFecha(arbolilloCitas, fecha);
 				}
 				else if (opcionReporte == 12) {
 					string idesp;
 					cout << "Id de especialidad: ";
 					getline(cin, idesp);
 					int idespint = stoi(idesp);
-					//rep.ReporteCitasPorEspecialidad(arbolilloCitas, arbolilloEsp, idespint);
+					rep.ReporteCitasPorEspecialidad(arbolilloCitas, arbolilloEsp, idespint);
 
 				}
 				else if (opcionReporte == 13) {

@@ -71,6 +71,8 @@ public:
     void ModificarCita(int idp, int idm, int idc, string motivo, int estado, ArbolPacientes& pacientes, ArbolMedicos& medicos);
     void InordenReportesCitasPorPaciente(pCita r, reportes& rep, int anchos[], int IdPacFiltro);
     void InordenReportesCitasPorMedico(pCita r, reportes& rep, int anchos[], int idMedFiltro);
+    void InordenReportesCitasPorEspecialidad(pCita r, reportes& rep, int anchos[], int idEspFiltro);
+    void InordenReportesCitasPorFecha(pCita r, reportes& rep, int anchos[], string fecha);
 
 };
 

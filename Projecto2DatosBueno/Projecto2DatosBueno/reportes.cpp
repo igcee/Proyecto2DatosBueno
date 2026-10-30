@@ -323,15 +323,33 @@ void reportes::ReporteMedicosPorEspecialidad(ArbolMedicos& medicos, ArbolEspecia
     medicos.InordenReportesMedicosPorEspecialidad(medicos.raiz, r, anchos, idEsp);
     r.guardarYTerminar(archivo);
 }
-/*
+
 void reportes::ReporteCitasPorFecha(ArbolCitas& citas, string fecha) {
-
+    reportes r;
+    string titulo = "Listado De Citas De Fecha: " + fecha;
+    r.generarEncabezado(titulo);
+    int anchos[] = { 30,55,55,55,80,70,115,60 };
+    string textos[] = { "Id", "IdPaciente","IdMedico","IdEspec","Fecha","Hora","Motivo","Estado" };
+    r.escribirFilaDinamica(8, textos, anchos);
+    citas.InordenReportesCitasPorFecha(citas.raiz, r, anchos, fecha);
+    r.guardarYTerminar("reporte_citas_de_especialidad.pdf");
 }
 
-void reportes::ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad& especialidades, int idEsp) {
-
+void reportes::ReporteCitasPorEspecialidad(ArbolCitas& citas, ArbolEspecialidad& especialidades, int idEspFltro) {
+    if (especialidades.Buscarvalor(idEspFltro) == nullptr) {
+        cout << "ERROR: no existe una especialidad de codigo: " << idEspFltro << endl;
+        return;
+    }
+    reportes r;
+    string titulo = "Listado De Citas De Especialidad Id " + to_string(idEspFltro);
+    r.generarEncabezado(titulo);
+    int anchos[] = { 30,55,55,55,80,70,115,60 };
+    string textos[] = { "Id", "IdPaciente","IdMedico","IdEspec","Fecha","Hora","Motivo","Estado" };
+    r.escribirFilaDinamica(8, textos, anchos);
+    citas.InordenReportesCitasPorMedico(citas.raiz, r, anchos, idEspFltro);
+    r.guardarYTerminar("reporte_citas_de_especialidad.pdf");
 }
-*/
+
 void reportes::ReporteCitasPorMedico(ArbolCitas& citas, ArbolMedicos& medicos, int idMedicoFiltro) {
     if (medicos.Buscarvalor(idMedicoFiltro) == nullptr) {
         cout << "ERROR: no existe un medico de codigo: " << idMedicoFiltro << endl;
