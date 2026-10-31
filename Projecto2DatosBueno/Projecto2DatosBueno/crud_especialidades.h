@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 using namespace std;
-
+#include "reportes.h"
 //Arbol AA, arbol binario de busqueda balanceado.
 //cambiamos factor de balance del AVL, cada nodo tiene un "nivel"
 //nodo nuevo nace con nivel 1, y el balanceo se hace con operaciones Skew y Split

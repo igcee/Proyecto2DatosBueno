@@ -27,6 +27,7 @@ endobj
 /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 /Font <<
 /F1 7 0 R
+/F2 8 0 R
 >>
 >>
 /Parent 2 0 R
@@ -43,19 +44,41 @@ BT
 (Numero de pagina: 1) Tj
 ET
 BT
-/F1 22 Tf
-170 800 Td
+/F2 22 Tf
+137 810 Td
 (Sistema de Gestion Hospitalaria) Tj
-/F1 16 Tf
--10 -40 Td
+/F2 16 Tf
+-90 -29 Td
 (Listado De Todos Los Pacientes) Tj
 /F1 10 Tf
-430 80 Td
-(1) Tj
+0 -23 Td
+(Fecha de emision del reporte: Fri Oct 30 21:19:48 2026\012) Tj
+290 3 Td
+(Empleados del mes:) Tj
+0 -14 Td
+(Ian Gabriel Castro Esquivel) Tj
+0 -14 Td
+(Maria Paula Monge Naranjo) Tj
+-290 -23 Td
+(Jefe del hospital: Ivannia Cerdas Quesada) Tj
+0 -14 Td
+(Jefe asistente: Isaac Van der Bom) Tj
 ET
+40 685 520 150 re
+40 800 m
+560 800 l
+40 775 m
+560 775 l
+40 750 m
+330 750 l
+330 725 m
+330 775 l
+40 725 m
+560 725 l
+S
 BT
 /F1 10 Tf
-45 700 Td
+45 650 Td
 (Id) Tj
 35 0 Td
 (Nombre) Tj
@@ -69,68 +92,6 @@ BT
 (Ciudad) Tj
 40 0 Td
 (Correo) Tj
-ET
-40 695 520 25 re
-75 695 m
-75 720 l
-205 695 m
-205 720 l
-272 695 m
-272 720 l
-347 695 m
-347 720 l
-382 695 m
-382 720 l
-422 695 m
-422 720 l
-S
-BT
-/F1 10 Tf
-45 675 Td
-(1004) Tj
-35 0 Td
-(Jos\303\251 L\303\263pez Mart\303\255nez) Tj
-130 0 Td
-(22\0571\0572011) Tj
-67 0 Td
-(506-7574-7916) Tj
-75 0 Td
-(506) Tj
-35 0 Td
-(4) Tj
-40 0 Td
-(jose.lopez77@correo.com) Tj
-ET
-40 670 520 25 re
-75 670 m
-75 695 l
-205 670 m
-205 695 l
-272 670 m
-272 695 l
-347 670 m
-347 695 l
-382 670 m
-382 695 l
-422 670 m
-422 695 l
-S
-BT
-/F1 10 Tf
-45 650 Td
-(1005) Tj
-35 0 Td
-(Jorge Solano Brenes) Tj
-130 0 Td
-(28\05712\0571981) Tj
-67 0 Td
-(506-6334-5119) Tj
-75 0 Td
-(506) Tj
-35 0 Td
-(5) Tj
-40 0 Td
-(jorge.solano71@correo.com) Tj
 ET
 40 645 520 25 re
 75 645 m
@@ -149,19 +110,19 @@ S
 BT
 /F1 10 Tf
 45 625 Td
-(1006) Tj
+(1004) Tj
 35 0 Td
-(Isabel Fern\303\241ndez Quesada) Tj
+(Jos\303\251 L\303\263pez Mart\303\255nez) Tj
 130 0 Td
-(13\0575\0572007) Tj
+(22\0571\0572011) Tj
 67 0 Td
-(506-4185-6573) Tj
+(506-7574-7916) Tj
 75 0 Td
 (506) Tj
 35 0 Td
-(1) Tj
+(4) Tj
 40 0 Td
-(isabel.fernandez15@correo.com) Tj
+(jose.lopez77@correo.com) Tj
 ET
 40 620 520 25 re
 75 620 m
@@ -177,11 +138,78 @@ ET
 422 620 m
 422 645 l
 S
+BT
+/F1 10 Tf
+45 600 Td
+(1005) Tj
+35 0 Td
+(Jorge Solano Brenes) Tj
+130 0 Td
+(28\05712\0571981) Tj
+67 0 Td
+(506-6334-5119) Tj
+75 0 Td
+(506) Tj
+35 0 Td
+(5) Tj
+40 0 Td
+(jorge.solano71@correo.com) Tj
+ET
+40 595 520 25 re
+75 595 m
+75 620 l
+205 595 m
+205 620 l
+272 595 m
+272 620 l
+347 595 m
+347 620 l
+382 595 m
+382 620 l
+422 595 m
+422 620 l
+S
+BT
+/F1 10 Tf
+45 575 Td
+(1006) Tj
+35 0 Td
+(Isabel Fern\303\241ndez Quesada) Tj
+130 0 Td
+(13\0575\0572007) Tj
+67 0 Td
+(506-4185-6573) Tj
+75 0 Td
+(506) Tj
+35 0 Td
+(1) Tj
+40 0 Td
+(isabel.fernandez15@correo.com) Tj
+ET
+40 570 520 25 re
+75 570 m
+75 595 l
+205 570 m
+205 595 l
+272 570 m
+272 595 l
+347 570 m
+347 595 l
+382 570 m
+382 595 l
+422 570 m
+422 595 l
+S
+BT
+/F1 10 Tf
+47 733 Td
+(Total de registros: 3) Tj
+ET
 
 endstream
 endobj
 6 0 obj
-1533
+1980
 endobj
 7 0 obj
 <<
@@ -191,22 +219,31 @@ endobj
 /Encoding /StandardEncoding
 >>
 endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /StandardEncoding
+>>
+endobj
 xref
-0 8
+0 9
 0000000000 65535 f
 0000000015 00000 n
 0000000064 00000 n
 0000000123 00000 n
 0000000184 00000 n
-0000000370 00000 n
-0000001957 00000 n
-0000001977 00000 n
+0000000380 00000 n
+0000002414 00000 n
+0000002434 00000 n
+0000002532 00000 n
 trailer
 <<
 /Root 1 0 R
 /Info 3 0 R
-/Size 8
+/Size 9
 >>
 startxref
-2075
+2635
 %%EOF
